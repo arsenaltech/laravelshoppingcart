@@ -1,12 +1,12 @@
 {
-    "name": "saleem189/cart",
-    "description": "Laravel 5 Shopping cart",
+    "name": "arsenaltech/cart",
+    "description": "Shopping cart",
     "keywords": ["laravel", "shopping cart", "cart"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Darryl Fernandez",
-            "email": "engrdarrylfernandez@gmail.com"
+            "name": "Karan Darji",
+            "email": "karan.darji@arsenaltech.com"
         }
     ],
     "require": {
