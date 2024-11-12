@@ -55,6 +55,8 @@ class Cart
      */
     protected $sessionKeyCartConditions;
 
+    protected $sessionKeyCartMetaInfo;
+
     /**
      * Configuration to pass to ItemCollection
      *
@@ -64,10 +66,21 @@ class Cart
 
     /**
      * This holds the currently added item id in cart for association
-     * 
+     *
      * @var
      */
     protected $currentItemId;
+
+    protected $metaInfo = [
+        'shippingAddress' => null,
+        'billingAddress' => null,
+        'shippingMethod'=>null,
+        'paymentInfo'=>null,
+    ];
+
+
+
+
 
     /**
      * our object constructor
@@ -86,6 +99,7 @@ class Cart
         $this->sessionKey = $session_key;
         $this->sessionKeyCartItems = $this->sessionKey . '_cart_items';
         $this->sessionKeyCartConditions = $this->sessionKey . '_cart_conditions';
+        $this->sessionKeyCartMetaInfo = $this->sessionKey . '_cart_meta_info';
         $this->config = $config;
         $this->currentItemId = null;
         $this->fireEvent('created');
@@ -105,10 +119,34 @@ class Cart
         $this->sessionKey = $sessionKey;
         $this->sessionKeyCartItems = $this->sessionKey . '_cart_items';
         $this->sessionKeyCartConditions = $this->sessionKey . '_cart_conditions';
+        $this->sessionKeyCartMetaInfo = $this->sessionKey . '_cart_meta_info';
 
         return $this;
     }
 
+    public function setShippingAddress($address)
+    {
+        $this->metaInfo['shippingAddress'] = $address;
+        $this->saveMetaInfo($this->metaInfo);
+    }
+
+    public function setBillingAddress($address)
+    {
+        $this->metaInfo['billingAddress'] = $address;
+        $this->save($this->metaInfo);
+    }
+
+    public function setShippingMethod($shippingMethod)    
+    {
+        $this->metaInfo['shippingMethod'] = $shippingMethod;
+        $this->save($this->metaInfo);
+    }
+
+    public function setPaymentInfo($paymentInfo)    
+    {
+        $this->metaInfo['paymentInfo'] = $paymentInfo;
+        $this->save($this->metaInfo);
+    }
     /**
      * get instance name of the cart
      *
@@ -398,6 +436,11 @@ class Cart
     public function getConditions()
     {
         return new CartConditionCollection($this->session->get($this->sessionKeyCartConditions));
+    }
+
+    public function getMetaInfo()
+    {
+        return $this->session->get($this->sessionKeyCartMetaInfo);
     }
 
     /**
@@ -754,6 +797,11 @@ class Cart
     protected function saveConditions($conditions)
     {
         $this->session->put($this->sessionKeyCartConditions, $conditions);
+    }
+
+    protected function saveMetaInfo($metaInfo)
+    {
+        $this->session->put($this->sessionKeyCartMetaInfo, $metaInfo);
     }
 
     /**
