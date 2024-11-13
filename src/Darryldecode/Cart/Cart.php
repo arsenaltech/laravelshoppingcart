@@ -126,26 +126,30 @@ class Cart
 
     public function setShippingAddress($address)
     {
-        $this->metaInfo['shippingAddress'] = $address;
-        $this->saveMetaInfo($this->metaInfo);
+        $metaInfo = $this->getMetaInfo();
+        $metaInfo['shippingAddress'] = $address;
+        $this->saveMetaInfo($metaInfo);
     }
 
     public function setBillingAddress($address)
     {
-        $this->metaInfo['billingAddress'] = $address;
-        $this->save($this->metaInfo);
+        $metaInfo = $this->getMetaInfo();
+        $metaInfo['billingAddress'] = $address;
+        $this->saveMetaInfo($metaInfo);
     }
 
     public function setShippingMethod($shippingMethod)    
     {
-        $this->metaInfo['shippingMethod'] = $shippingMethod;
-        $this->save($this->metaInfo);
+        $metaInfo = $this->getMetaInfo();
+        $metaInfo['shippingMethod'] = $shippingMethod;
+        $this->saveMetaInfo($metaInfo);
     }
 
     public function setPaymentInfo($paymentInfo)    
     {
-        $this->metaInfo['paymentInfo'] = $paymentInfo;
-        $this->save($this->metaInfo);
+        $metaInfo = $this->getMetaInfo();
+        $metaInfo['paymentInfo'] = $paymentInfo;
+        $this->saveMetaInfo($metaInfo);
     }
     /**
      * get instance name of the cart
