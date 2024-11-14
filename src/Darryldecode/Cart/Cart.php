@@ -444,7 +444,8 @@ class Cart
 
     public function getMetaInfo()
     {
-        return $this->session->get($this->sessionKeyCartMetaInfo);
+        $metaInfo = $this->session->get($this->sessionKeyCartMetaInfo);
+        return !empty($metaInfo) ? $metaInfo : $this->metaInfo;
     }
 
     /**
