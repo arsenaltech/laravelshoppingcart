@@ -76,6 +76,7 @@ class Cart
         'billingAddress' => null,
         'shippingMethod'=>null,
         'paymentInfo'=>null,
+        'discount' => null,
     ];
 
 
@@ -151,6 +152,14 @@ class Cart
         $metaInfo['paymentInfo'] = $paymentInfo;
         $this->saveMetaInfo($metaInfo);
     }
+
+    public function setDiscount($discount)
+    {
+        $metaInfo = $this->getMetaInfo();
+        $metaInfo['discount'] = $discount;
+        $this->saveMetaInfo($metaInfo);
+    }
+
     /**
      * get instance name of the cart
      *
